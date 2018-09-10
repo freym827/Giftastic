@@ -2,11 +2,16 @@
 var topics = ["rihanna", "kehlani", "robyn", "carly rae jepsen", 
 "lauryn hill", "lana del rey", "ke$ha", "amy winehouse", "beyonce", "katy parry", "lady gaga", "shakira", "taylor swift", "ariana grande", 
 "hilary duff", "adele", "SZA", "madonna", "cardi b", "natalie imbruglia", "kelly clarkson", "nicki minaj", "lorde"];
+var morebtn = $(".morebtn");
+var gifcount = 0;
+var singer = "";
 //function to to start handling click of created buttons, taking name of button, and passing it to be searched in giffy string
 var gifup = function() {
     $("#travel").html("")
-    var thing = $(this).attr("data-thing");
-    giffyness(thing);
+    singer = $(this).attr("data-thing");
+    gifcount = 10;
+    giffyness();
+    morebtn.css("display", "block");
 }
 //function that creates the buttons in the array. first deletes existing buttons. adds click event to buttons. puts on page. 
 var topicbtn = function() {
@@ -39,15 +44,15 @@ var animation = function() {
 topicbtn();
 
 //ajax call and fills buttons with data and junk.
-var giffyness = function(topicsearch) {
-    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + topicsearch + "&api_key=TuHl7HKAs0teB4wZYddJHr3SiuEcTFRJ&rating=pg&limit=10"
+var giffyness = function() {
+    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + singer + "&api_key=TuHl7HKAs0teB4wZYddJHr3SiuEcTFRJ&rating=pg&limit=" + gifcount;
     $.ajax({
         url: queryurl,
         method: "GET"
       })
       .then(function(response) {
         var results = response.data;
-        for (var i = 0; i < results.length; i++) {
+        for (var i = (gifcount - 10); i < gifcount; i++) {
           var gifDiv = $("<div class='gifdivs'>");
 
           var rating = results[i].rating;
@@ -73,6 +78,11 @@ var giffyness = function(topicsearch) {
 $(".sbtn").on("click", function() {
     topics.push($(".inptxt").val().trim());
     topicbtn();
+});
+
+morebtn.on("click", function() {
+    gifcount += 10;
+    giffyness();
 });
 
 

@@ -56,3 +56,9 @@ body {
   .giffydivvy {
       width: 75%;
   }
+
+  .morebtn {
+      clear: both;
+      margin-left: 33%;
+      display: none;
+  }
