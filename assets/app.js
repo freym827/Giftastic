@@ -3,7 +3,9 @@ var topics = ["rihanna", "kehlani", "robyn", "carly rae jepsen",
 "lauryn hill", "lana del rey", "ke$ha", "amy winehouse", "beyonce", "katy parry", "lady gaga", "shakira", "taylor swift", "ariana grande", 
 "hilary duff", "adele", "SZA", "madonna", "cardi b", "natalie imbruglia", "kelly clarkson", "nicki minaj", "lorde"];
 var morebtn = $(".morebtn");
+//number of gifs to be displayed on page
 var gifcount = 0;
+//current singer to search for
 var singer = "";
 //function to to start handling click of created buttons, taking name of button, and passing it to be searched in giffy string
 var gifup = function() {
@@ -52,6 +54,7 @@ var giffyness = function() {
       })
       .then(function(response) {
         var results = response.data;
+        //formatted to get 10 gifs at a time
         for (var i = (gifcount - 10); i < gifcount; i++) {
           var gifDiv = $("<div class='gifdivs'>");
 
@@ -60,11 +63,13 @@ var giffyness = function() {
           var p = $("<p>").text("Rating: " + rating);
 
           var thingimg = $("<img>");
+          //setting still picture, saving still picture and animated gif, giving state and class to each image. 
           thingimg.attr("src", results[i].images.fixed_height_still.url);
           thingimg.attr("data-still", results[i].images.fixed_height_still.url);
           thingimg.attr("data-animate", results[i].images.fixed_height.url);
           thingimg.attr("data-state", "still");
           thingimg.addClass("gif");
+          //setting click event
           thingimg.on("click", animation);
 
           gifDiv.prepend(thingimg);
@@ -74,12 +79,13 @@ var giffyness = function() {
         }
       });
 }
-//click of add button.
+//click of add button button
 $(".sbtn").on("click", function() {
     topics.push($(".inptxt").val().trim());
     topicbtn();
 });
 
+//more button puts 10 more gifs on page
 morebtn.on("click", function() {
     gifcount += 10;
     giffyness();
