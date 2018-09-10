@@ -1,6 +1,8 @@
 //original array of ideas
-var topics = ["trains", "plane", "automobile", "iceland", "everest", "barcelona", "helicopter", "egypt", "dublin", "airport", "alaska"];
-//function to to start handling click of created buttons
+var topics = ["rihanna", "kehlani", "robyn", "carly rae jepsen", 
+"lauryn hill", "lana del rey", "ke$ha", "amy winehouse", "beyonce", "katy parry", "lady gaga", "shakira", "taylor swift", "ariana grande", 
+"hilary duff", "adele", "SZA", "madonna", "cardi b", "natalie imbruglia", "kelly clarkson", "nicki minaj", "lorde"];
+//function to to start handling click of created buttons, taking name of button, and passing it to be searched in giffy string
 var gifup = function() {
     $("#travel").html("")
     var thing = $(this).attr("data-thing");
@@ -38,7 +40,7 @@ topicbtn();
 
 //ajax call and fills buttons with data and junk.
 var giffyness = function(topicsearch) {
-    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + topicsearch + "&api_key=TuHl7HKAs0teB4wZYddJHr3SiuEcTFRJ&limit=10"
+    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + topicsearch + "&api_key=TuHl7HKAs0teB4wZYddJHr3SiuEcTFRJ&rating=pg&limit=10"
     $.ajax({
         url: queryurl,
         method: "GET"
