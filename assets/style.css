@@ -62,3 +62,26 @@ body {
       margin-left: 33%;
       display: none;
   }
+
+  @media screen and (max-width: 600px) {
+    .morebtn {
+        width: 100%;
+        margin-left: 0%;
+    }
+    .giffydivvy {
+        width: 100%;
+    }
+    .gifdivs {
+        margin: 0px;
+    }
+    .adddiv {
+        float: left;
+        width: 100%;
+    }
+    p {
+        font-size: 12px;
+    }
+    .singhead {
+        font-size: 20px;
+    }
+  }

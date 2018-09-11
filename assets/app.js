@@ -59,8 +59,14 @@ var giffyness = function() {
           var gifDiv = $("<div class='gifdivs'>");
 
           var rating = results[i].rating;
-
+          var caption = results[i].title;
+          var source = results[i].source_tld
+          if(source == "") {
+              source = "No source available"
+          }
           var p = $("<p>").text("Rating: " + rating);
+          var p2 = $("<p>").text(caption);
+          var p3 = $("<p>").text("Source: " + source);
 
           var thingimg = $("<img>");
           //setting still picture, saving still picture and animated gif, giving state and class to each image. 
@@ -73,7 +79,11 @@ var giffyness = function() {
           thingimg.on("click", animation);
 
           gifDiv.prepend(thingimg);
+          gifDiv.prepend(p2);
+          gifDiv.prepend(p3);
           gifDiv.prepend(p);
+          gifDiv.css("border", "4px inset #999")
+          gifDiv.css("padding", "10px")
 
           $("#travel").append(gifDiv);
         }
