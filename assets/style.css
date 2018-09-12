@@ -64,6 +64,18 @@ body {
       margin-bottom: 100px;
   }
 
+  .favbtn {
+    background-color: red;
+}
+.clearfav {
+    background-color: red;
+}
+
+.favdiv {
+    display: none;
+    width: 75%;
+}
+
   @media screen and (max-width: 1050px) {
     .morebtn {
         width: 100%;
@@ -86,11 +98,4 @@ body {
         font-size: 20px;
     }
   }
-  
-  .favdiv {
-      display: none;
-  }
 
-  .favbtn {
-      background-color: red;
-  }

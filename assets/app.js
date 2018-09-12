@@ -44,15 +44,26 @@ var animation = function() {
     }
 }
 
+
+//adds favorites to favorite div when click favorite button. uses data stored in button.
 var addfavorite = function() {
+    var gifDiv = $("<div class='gifdivs'>");
     var thingimg = $("<img>");
     thingimg.attr("src", $(this).attr("data-still"));
     thingimg.attr("data-still", $(this).attr("data-still"));
     thingimg.attr("data-animate", $(this).attr("data-animate"));
     thingimg.attr("data-state", "still");
     thingimg.on("click", animation);
-    thingimg.css("margin", "10px")
-    $(".favdiv").append(thingimg)
+    var p = $("<p>").text("Rating: " + $(this).attr("data-rating"));
+    var p2 = $("<p>").text($(this).attr("data-caption"));
+    var p3 = $("<p>").text("Source: " + $(this).attr("data-source"));
+    gifDiv.prepend(thingimg);
+    gifDiv.prepend(p2);
+    gifDiv.prepend(p3);
+    gifDiv.prepend(p);
+    gifDiv.css("border", "4px inset #999")
+    gifDiv.css("padding", "10px")
+    $(".favdiv").append(gifDiv)
 }
 //call on page load
 topicbtn();
@@ -94,6 +105,9 @@ var giffyness = function() {
           favorite.attr("data-still", results[i].images.fixed_height_still.url);
           favorite.attr("data-animate", results[i].images.fixed_height.url);
           favorite.attr("data-state", "still");
+          favorite.attr("data-caption", caption);
+          favorite.attr("data-source", source);
+          favorite.attr("data-rating", rating);
 
           //setting click event
           thingimg.on("click", animation);
@@ -138,6 +152,10 @@ $(".favbtn").on("click", function() {
     $("#travel").html("")
     $(".favdiv").css("display", "block")
     morebtn.css("display", "none");
+});
+
+$(".clearfav").on("click", function() {
+    $(".favdiv").html("")
 });
 
 
