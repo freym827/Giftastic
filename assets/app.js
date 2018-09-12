@@ -1,7 +1,7 @@
 //original array of ideas
 var topics = ["rihanna", "kehlani", "robyn", "carly rae jepsen", 
 "lauryn hill", "lana del rey", "ke$ha", "amy winehouse", "beyonce", "katy parry", "lady gaga", "shakira", "taylor swift", "ariana grande", 
-"hilary duff", "adele", "SZA", "madonna", "cardi b", "natalie imbruglia", "kelly clarkson", "nicki minaj", "lorde"];
+"hilary duff", "adele", "SZA", "madonna", "cardi b", "blastoise", "natalie imbruglia", "kelly clarkson", "nicki minaj", "lorde"];
 var morebtn = $(".morebtn");
 //number of gifs to be displayed on page
 var gifcount = 0;
@@ -91,8 +91,17 @@ var giffyness = function() {
 }
 //click of add button button
 $(".sbtn").on("click", function() {
-    topics.push($(".inptxt").val().trim());
+    var input = $(".inptxt").val().trim();
+    var int = topics.indexOf(input)
+    if(input == "") {
+        $(".inptxt").val("")
+        return;
+    }
+    if(int == -1) {
+    topics.push(input);
     topicbtn();
+    }
+    $(".inptxt").val("")
 });
 
 //more button puts 10 more gifs on page
