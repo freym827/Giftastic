@@ -10,6 +10,7 @@ var singer = "";
 //function to to start handling click of created buttons, taking name of button, and passing it to be searched in giffy string
 var gifup = function() {
     $("#travel").html("")
+    $(".favdiv").css("display", "none");
     singer = $(this).attr("data-thing");
     gifcount = 10;
     giffyness();
@@ -42,6 +43,17 @@ var animation = function() {
         $(this).attr("data-state", "still");
     }
 }
+
+var addfavorite = function() {
+    var thingimg = $("<img>");
+    thingimg.attr("src", $(this).attr("data-still"));
+    thingimg.attr("data-still", $(this).attr("data-still"));
+    thingimg.attr("data-animate", $(this).attr("data-animate"));
+    thingimg.attr("data-state", "still");
+    thingimg.on("click", animation);
+    thingimg.css("margin", "10px")
+    $(".favdiv").append(thingimg)
+}
 //call on page load
 topicbtn();
 
@@ -67,6 +79,10 @@ var giffyness = function() {
           var p = $("<p>").text("Rating: " + rating);
           var p2 = $("<p>").text(caption);
           var p3 = $("<p>").text("Source: " + source);
+          var favorite = $("<button>").text("Add Favorite");
+          favorite.addClass("btn")
+          favorite.css("float", "right")
+
 
           var thingimg = $("<img>");
           //setting still picture, saving still picture and animated gif, giving state and class to each image. 
@@ -74,7 +90,11 @@ var giffyness = function() {
           thingimg.attr("data-still", results[i].images.fixed_height_still.url);
           thingimg.attr("data-animate", results[i].images.fixed_height.url);
           thingimg.attr("data-state", "still");
-          thingimg.addClass("gif");
+
+          favorite.attr("data-still", results[i].images.fixed_height_still.url);
+          favorite.attr("data-animate", results[i].images.fixed_height.url);
+          favorite.attr("data-state", "still");
+
           //setting click event
           thingimg.on("click", animation);
 
@@ -82,8 +102,11 @@ var giffyness = function() {
           gifDiv.prepend(p2);
           gifDiv.prepend(p3);
           gifDiv.prepend(p);
+          gifDiv.prepend(favorite)
           gifDiv.css("border", "4px inset #999")
           gifDiv.css("padding", "10px")
+
+          favorite.on("click", addfavorite)
 
           $("#travel").append(gifDiv);
         }
@@ -109,6 +132,12 @@ $(".sbtn").on("click", function() {
 morebtn.on("click", function() {
     gifcount += 10;
     giffyness();
+});
+
+$(".favbtn").on("click", function() {
+    $("#travel").html("")
+    $(".favdiv").css("display", "block")
+    morebtn.css("display", "none");
 });
 
 
